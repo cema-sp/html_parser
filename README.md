@@ -10,6 +10,8 @@ Simple API to fetch URL and parse H1, H3, H3 and A tags.
 
 ## ENV vars
 
+* `HTML_PARSER_DB_NAME` - database name
+
 ## Installation
 
 1. Clone repo
