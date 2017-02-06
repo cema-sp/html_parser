@@ -41,7 +41,9 @@ GEM
     arel (7.1.4)
     builder (3.2.3)
     byebug (9.0.6)
+    coderay (1.1.1)
     concurrent-ruby (1.0.4)
+    database_cleaner (1.5.3)
     dotenv (2.1.0)
     dotenv-rails (2.1.0)
       dotenv (= 2.1.0)
@@ -64,10 +66,17 @@ GEM
     mime-types-data (3.2016.0521)
     mini_portile2 (2.1.0)
     minitest (5.10.1)
+    minitest-spec-rails (5.4.0)
+      minitest (~> 5.0)
+      rails (>= 4.1)
     nio4r (1.2.1)
     nokogiri (1.7.0.1)
       mini_portile2 (~> 2.1.0)
     pg (0.19.0)
+    pry (0.10.4)
+      coderay (~> 1.1.0)
+      method_source (~> 0.8.1)
+      slop (~> 3.4)
     puma (3.7.0)
     rack (2.0.1)
     rack-test (0.6.3)
@@ -99,6 +108,7 @@ GEM
     rb-fsevent (0.9.8)
     rb-inotify (0.9.8)
       ffi (>= 0.5.0)
+    slop (3.6.0)
     spring (2.0.1)
       activesupport (>= 4.2)
     spring-watcher-listen (2.0.1)
@@ -124,9 +134,13 @@ PLATFORMS
 
 DEPENDENCIES
   byebug
+  database_cleaner (~> 1.5.3)
   dotenv-rails
   listen (~> 3.0.5)
+  minitest (~> 5.10.1)
+  minitest-spec-rails (~> 5.4.0)
   pg (~> 0.18)
+  pry
   puma (~> 3.0)
   rails (~> 5.0.1)
   spring
