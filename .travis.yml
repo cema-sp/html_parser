@@ -9,6 +9,9 @@ bundler_args: --without production
 services:
   - postgresql
 
+addons:
+  postgresql: "9.4"
+
 before_script:
   - source .env.test
-  - psql -c "create database $HTML_PARSER_DB_NAME;" -U postgres
+  - psql -c "create database ${HTML_PARSER_DB_NAME:-html_parser_test};" -U postgres
