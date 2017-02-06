@@ -1,4 +1,5 @@
 # HTML parser
+[![Build Status](https://travis-ci.org/cema-sp/html_parser.svg?branch=master)](https://travis-ci.org/cema-sp/html_parser)
 
 Simple API to fetch URL and parse H1, H3, H3 and A tags.
 

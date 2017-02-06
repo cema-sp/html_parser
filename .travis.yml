@@ -3,4 +3,12 @@ language: ruby
 rvm:
   - 2.3.3
 
+cache: bundler
 bundler_args: --without production
+
+services:
+  - postgresql
+
+before_script:
+  - source .env.test
+  - psql -c "create database $HTML_PARSER_DB_NAME;" -U postgres
