@@ -1,30 +1,46 @@
 require 'test_helper'
 
 class RequestCreateListTest < ActionDispatch::IntegrationTest
-  describe "Create request" do
-    let(:params) { { url: 'http://example.com' } }
-    let(:headers) { { 'Content-Type' => 'application/json' } }
+  describe "create request" do
+    let(:url) { 'http://integration-test-url.com' }
+    let(:params) { { url: url } }
+
+    let(:do_post) { post requests_url, params: params, as: :json }
 
     describe "with valid params" do
       it 'returns request id' do
-        post '/requests', params: params, headers: headers
-        assert_request :success
+        do_post
+        req = JSON.parse(response.body)
+
+        req["id"].wont_be_nil
       end
 
-      describe "Listing requests" do
+      describe "and listing requests" do
+        let(:do_get) { get requests_url, as: :json }
+
+        before { do_post }
+
         it 'returns the request' do
-          get '/requests'
-          assert_request :success
+          do_get
+          reqs = JSON.parse(response.body)
+          req = reqs.find { |r| r["url"] == url }
+
+          req.wont_be_nil
         end
       end
     end
 
     describe "with invalid params" do
-      let(:params) { { url: 'http://example.com' } }
+      let(:params) { {} }
 
       it 'returns error message' do
-        post '/requests', params: params, headers: headers
-        assert_request :fail
+        do_post
+
+        response.status.wont_equal 200
+
+        resp = JSON.parse(response.body)
+
+        resp["url"].wont_be_nil
       end
     end
   end

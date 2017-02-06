@@ -1,9 +1,8 @@
 class Request < ApplicationRecord
   STATES = %w(pending success fail)
 
-  has_many :results
+  has_one :result
 
-  def result
-    results.last
-  end
+  validates :url, presence: true
+  validates :state, presence: true
 end

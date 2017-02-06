@@ -2,3 +2,12 @@
 
 example:
   url: 'http://example.com'
+  state: 'success'
+
+error:
+  url: 'http://error.com'
+  state: 'fail'
+
+heavy:
+  url: 'http://heavy-page.com'
+
