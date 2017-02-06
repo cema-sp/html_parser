@@ -1,24 +1,24 @@
-# README
+# HTML parser
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Simple API to fetch URL and parse H1, H3, H3 and A tags.
 
-Things you may want to cover:
+## Stack
 
-* Ruby version
+* Ruby 2.3.3
+* Rails 5.0
+* Puma
 
-* System dependencies
+## ENV vars
 
-* Configuration
+## Installation
 
-* Database creation
+1. Clone repo
+2. Prepare DB & set ENV vars (see [ENV vars](#env-vars))
+3. `bundle install`
+4. `rails db:migrate`
+5. Run test suite: `rails t`
+6. Start server: `rails s`
 
-* Database initialization
+## Example usage
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+TODO
