@@ -1,46 +1,38 @@
 require 'test_helper'
 
 class RequestCreateListTest < ActionDispatch::IntegrationTest
-  describe "create request" do
+  describe "create request and get it by id" do
     let(:url) { 'http://integration-test-url.com' }
     let(:params) { { url: url } }
 
     let(:do_post) { post requests_url, params: params, as: :json }
 
-    describe "with valid params" do
-      it 'returns request id' do
+    describe "and get requests list" do
+      let(:do_get) { get requests_url, as: :json }
+
+      it 'creates a new request' do
+        do_get
+        req_cnt_before = JSON.parse(response.body).size
+
         do_post
-        req = JSON.parse(response.body)
 
-        req["id"].wont_be_nil
-      end
+        do_get
+        req_cnt_after = JSON.parse(response.body).size
 
-      describe "and listing requests" do
-        let(:do_get) { get requests_url, as: :json }
-
-        before { do_post }
-
-        it 'returns the request' do
-          do_get
-          reqs = JSON.parse(response.body)
-          req = reqs.find { |r| r["url"] == url }
-
-          req.wont_be_nil
-        end
+        req_cnt_after.must_be :>, req_cnt_before
       end
     end
 
-    describe "with invalid params" do
-      let(:params) { {} }
+    describe "and get it by id" do
+      let(:do_get) { -> (id) { get request_url(id), as: :json } }
 
-      it 'returns error message' do
+      it 'creates a new request' do
         do_post
+        new_req_id = JSON.parse(response.body)["id"]
 
-        response.status.wont_equal 200
+        do_get[new_req_id]
 
-        resp = JSON.parse(response.body)
-
-        resp["url"].wont_be_nil
+        response.status.must_equal 200
       end
     end
   end

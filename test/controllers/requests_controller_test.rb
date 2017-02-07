@@ -28,19 +28,38 @@ class RequestsControllerTest < ActionDispatch::IntegrationTest
   end
 
   describe "POST /requests" do
-    let(:url) { 'https://angel.co' }
     let(:params) { { url: url } }
 
     subject { post requests_url, params: params, as: :json }
 
-    it "returns 201" do
-      subject
-      response.status.must_equal 201
+    describe "with valid url" do
+      let(:url) { 'https://angel.co' }
+
+      it "returns 201" do
+        subject
+        response.status.must_equal 201
+      end
+
+      it "creates a request" do
+        assert_difference('Request.count', 1) do
+          subject
+        end
+      end
     end
 
-    it "creates a request" do
-      assert_difference('Request.count', 1) do
+    describe "with invalid url" do
+      let(:url) { nil }
+
+      it 'returns 422' do
         subject
+        response.status.must_equal 422
+      end
+
+      it 'retirns error message' do
+        subject
+        resp = JSON.parse(response.body)
+
+        resp["url"].wont_be_nil
       end
     end
   end
