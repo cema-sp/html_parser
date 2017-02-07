@@ -1,6 +1,8 @@
 require 'test_helper'
 
 class RequestsControllerTest < ActionDispatch::IntegrationTest
+  include ActiveJob::TestHelper
+
   describe "GET /requests" do
     subject { get requests_url, as: :json }
 
@@ -42,6 +44,12 @@ class RequestsControllerTest < ActionDispatch::IntegrationTest
 
       it "creates a request" do
         assert_difference('Request.count', 1) do
+          subject
+        end
+      end
+
+      it "schedules ProcessRequestJob" do
+        assert_enqueued_with(job: ProcessRequestJob) do
           subject
         end
       end

@@ -8,6 +8,6 @@ error:
   url: 'http://error.com'
   state: 'fail'
 
-heavy:
-  url: 'http://heavy-page.com'
+new:
+  url: 'http://new-req.com'
 

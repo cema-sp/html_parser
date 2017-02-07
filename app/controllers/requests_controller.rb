@@ -17,11 +17,14 @@ class RequestsController < ApplicationController
   def create
     @request = Request.new(params.permit(:url))
 
-    if @request.save
-      render json: @request, status: :created, location: @request
-    else
+    unless @request.save
       render json: @request.errors, status: :unprocessable_entity
+      return
     end
+
+    ProcessRequestJob.perform_later(@request.id)
+
+    render json: @request, status: :created, location: @request
   end
 
   private
