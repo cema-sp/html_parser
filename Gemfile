@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+ruby '2.3.3'
+
 gem 'rails', '~> 5.0.1'
 gem 'pg', '~> 0.18'
 
@@ -9,6 +11,7 @@ gem 'nokogiri'
 
 group :production do
   gem 'puma', '~> 3.0'
+  gem 'rails_12factor'
 end
 
 group :development, :test do

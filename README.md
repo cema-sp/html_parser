@@ -24,4 +24,10 @@ Simple API to fetch URL and parse H1, H3, H3 and A tags.
 
 ## Example usage
 
-TODO
+1. Run server (see [Installation](#installation) or use [heroku])
+2. `curl -i http://localhost:3000/requests -XPOST -H "Content-Type: application/json" -d '{"url": "http://angel.co"}'`
+3. Remember returned **id**
+4. Get result: `curl -i http://localhost:3000/requests/1`, where _1_ = **id**
+5. List all requests: `curl -i http://localhost:3000/requests`
+
+[heroku]: https://heroku.com "Simple HTML parser"
